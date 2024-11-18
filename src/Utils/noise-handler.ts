@@ -125,6 +125,7 @@ export const makeNoiseHandler = ({
 			return keyEnc
 		},
 		encodeFrame: (data: Buffer | Uint8Array) => {
+			console.log(data)
 			if(isFinished) {
 				data = encrypt(data)
 			}
@@ -151,7 +152,10 @@ export const makeNoiseHandler = ({
 				sentIntro = true
 			}
 
+			console.log(frame)
+
 			frame.writeUInt8(data.byteLength >> 16, introSize)
+			console.log(frame)
 			frame.writeUInt16BE(65535 & data.byteLength, introSize + 1)
 			frame.set(data, introSize + 3)
 
